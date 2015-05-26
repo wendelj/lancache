@@ -1,0 +1,12 @@
+# GOG Node
+include lancache/resolver;
+
+location / {
+	# GOG CDN caching works for both web and GOG Galaxy downloads.
+	# Security information is included with the request uri so we use only the uri.
+	proxy_set_header Range $http_range;
+	proxy_set_header If-Range $http_if_range;
+	proxy_cache_key "$server_name$uri $http_range";
+	proxy_cache_valid 206 90d;
+	include lancache/cache-installs;
+}
