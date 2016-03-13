@@ -2,11 +2,12 @@
 include lancache/resolver;
 
 location / {
-	# Some downloads are very large so we cache based on range to keep
+	# Some downloads are very large so we cache based on slice range to keep
 	# single downloads quick and hence ensure interactivity is good.
-	proxy_set_header Range $http_range;
-	proxy_set_header If-Range $http_if_range;
-	proxy_cache_key "$server_name$request_uri $http_range";
+	slice 5m;
+	proxy_set_header Range $slice_range;
+	proxy_hide_header Etag;
+	proxy_cache_key "$server_name$request_uri $slice_range";
 	proxy_cache_valid 206 90d;
 	include lancache/cache-installs;
 }

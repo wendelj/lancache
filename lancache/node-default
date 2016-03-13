@@ -3,5 +3,6 @@ include lancache/resolver;
 include lancache/cache-key-default;
 
 location / {
+	slice 0;
 	include lancache/cache-installs;
 }

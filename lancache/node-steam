@@ -9,6 +9,7 @@ location /depot/ {
 
 	# Steam sometimes passes security parameters on the URI so we
 	# cache based on just the URI excluding the query string
+	slice 0;
 	proxy_cache_key "$server_name$uri";
 	include lancache/cache-installs;
 }
@@ -16,12 +17,19 @@ location /depot/ {
 # Store results from /serverlist/ request as they should allow us to
 # determine if we are missing an DNS entries for content servers
 location /serverlist/ {
+	slice 0;
 	proxy_store /srv/www/cache/steam$uri/servers.txt;
 	proxy_store_access user:rw group:rw all:r;
 	include lancache/proxy-base;
 }
 
+location /chat/ {
+	proxy_pass $request;
+}
+
+
 location / {
+	slice 0;
 	include lancache/cache-key-default;
 	include lancache/cache-other;
 }       
