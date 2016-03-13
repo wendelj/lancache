@@ -24,7 +24,11 @@ location /serverlist/ {
 }
 
 location /chat/ {
-	proxy_pass $request;
+	include lancache/proxy-base;
+}
+ 
+location /broadcast/ {
+	include lancache/proxy-base;
 }
 
 
