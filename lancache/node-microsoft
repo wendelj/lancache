@@ -78,3 +78,4 @@ location @redirect {
         # We need to copy the variable as it's not available after the pass starts
         set $location $upstream_http_location;
         proxy_pass $location;
+}
