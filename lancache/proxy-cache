@@ -23,3 +23,7 @@ proxy_cache_bypass $arg_nocache;
 
 # 40G max file
 proxy_max_temp_file_size 40960m;
+
+proxy_buffers 32 4m;
+proxy_busy_buffers_size 25m;
+proxy_buffer_size 512k;
