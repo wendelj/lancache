@@ -141,4 +141,6 @@ content.turbine.com.edgesuite.net
 download.ddo.akamai.turbine.com
 download.lotro.akamai.turbine.com
 
+#Ubisoft uPlay
+uplaypc-s-ubisoft.cdn.ubi.com
 ```
