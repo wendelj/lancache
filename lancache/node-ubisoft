@@ -1,0 +1,15 @@
+# Ubisoft Node
+include lancache/resolver;
+
+location /uplaypc/ {
+        # Ubisoft sometimes passes security and other parameters on the URI so we 
+        # cache based on just the URI excluding the query string
+        slice 0;
+        proxy_cache_key "$server_name$uri";
+        include lancache/cache-installs;
+}
+location / {
+        slice 0;
+        include lancache/cache-key-default;
+        include lancache/cache-other;
+}
